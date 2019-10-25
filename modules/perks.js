@@ -5,7 +5,7 @@ MODULES["perks"].showDetails = true;
 var head = document.getElementsByTagName('head')[0];
 var queuescript = document.createElement('script');
 queuescript.type = 'text/javascript';
-queuescript.src = 'https://Zorn192.github.io/AutoTrimps/FastPriorityQueue.js';
+queuescript.src = 'https://nkilio1991.github.io/AutoTrimps/FastPriorityQueue.js';
 head.appendChild(queuescript);
 if (game.global.universe == 1) {
 //[looting,toughness,power,motivation,pheromones,artisanistry,carpentry,resilience,coordinated,resourceful,overkill,cunning,curious,classy]
@@ -115,14 +115,14 @@ AutoPerks.displayGUI = function() {
     apGUI.$ratioPreset.innerHTML = presetListHtml;
     var loadLastPreset = localStorage.getItem('AutoperkSelectedRatioPresetID');
     var setID;
-    if (loadLastPreset != null) { 
+    if (loadLastPreset != null) {
        if (loadLastPreset == 15 && !localStorage.getItem('AutoperkSelectedRatioPresetName'))
             loadLastPreset = 11;
         if (localStorage.getItem('AutoperkSelectedRatioPresetName')=="customPreset")
             loadLastPreset = 11;
         setID = loadLastPreset;
     }
-    else 
+    else
         setID = 0;
     apGUI.$ratioPreset.selectedIndex = setID;
     apGUI.$ratiosLine1.appendChild(apGUI.$ratioPresetLabel);
@@ -246,7 +246,7 @@ AutoPerks.clickAllocate = function() {
         remainingHelium = helium - preSpentHe;
     }
     if (Number.isNaN(remainingHelium))
-        debug("AutoPerks: Major Error: Reading your Helium amount. " + remainingHelium, "perks");    
+        debug("AutoPerks: Major Error: Reading your Helium amount. " + remainingHelium, "perks");
 
     var result;
     if (getPageSetting('fastallocate')==true)
@@ -312,7 +312,7 @@ AutoPerks.spendHelium = function(helium) {
         debug("AutoPerks: Major Error - Helium is Not a Number!","perks");
         return false;
     }
-    
+
     var perks = AutoPerks.getVariablePerks();
 
     var effQueue = new FastPriorityQueue(function(a,b) { return a.efficiency > b.efficiency } ) // Queue that keeps most efficient purchase at the top
@@ -327,7 +327,7 @@ AutoPerks.spendHelium = function(helium) {
             return false;
         }
         if(perks[i].efficiency != 0)
-            effQueue.add(perks[i]);        
+            effQueue.add(perks[i]);
     }
     if (effQueue.size < 1) {
         debug("All Perk Ratios were 0, or some other error.","perks");
@@ -368,15 +368,15 @@ AutoPerks.spendHelium = function(helium) {
             }
         }
         var dumpresults = heb4dump - helium;
-        debug("AutoPerks1: Dump Perk " + AutoPerks.capitaliseFirstLetter(dumpPerk.name) + " level post-dump: "+ dumpPerk.level + " Helium Dumped: " + prettify(dumpresults) + " He.", "perks");        
+        debug("AutoPerks1: Dump Perk " + AutoPerks.capitaliseFirstLetter(dumpPerk.name) + " level post-dump: "+ dumpPerk.level + " Helium Dumped: " + prettify(dumpresults) + " He.", "perks");
     }
-    
+
     var heB4round2 = helium;
     while (effQueue.size > 1) {
         mostEff = effQueue.poll();
         if (mostEff.level >= mostEff.max) continue;
         price = AutoPerks.calculatePrice(mostEff, mostEff.level);
-        if (price >= helium) continue;        
+        if (price >= helium) continue;
         helium -= price;
         mostEff.level++;
         mostEff.spent += price;
@@ -443,7 +443,7 @@ AutoPerks.spendHelium2 = function(helium) {
             }  else  {
                 helium -= price;
                 mostEff.level++;
-                mostEff.spent += price;            
+                mostEff.spent += price;
             }
             price = AutoPerks.calculatePrice(mostEff, mostEff.level);
             inc = AutoPerks.calculateIncrease(mostEff, mostEff.level);
@@ -466,9 +466,9 @@ AutoPerks.spendHelium2 = function(helium) {
             }
         }
         var dumpresults = heb4dump - helium;
-        debug("AutoPerks2: Dump Perk " + AutoPerks.capitaliseFirstLetter(dumpPerk.name) + " level post-dump: "+ dumpPerk.level + " Helium Dumped: " + prettify(dumpresults) + " He.", "perks");        
+        debug("AutoPerks2: Dump Perk " + AutoPerks.capitaliseFirstLetter(dumpPerk.name) + " level post-dump: "+ dumpPerk.level + " Helium Dumped: " + prettify(dumpresults) + " He.", "perks");
     }
-    
+
     var heB4round2 = helium;
     while (effQueue.size > 1) {
         mostEff = effQueue.poll();
@@ -587,7 +587,7 @@ AutoPerks.FixedPerk = function(name, base, level, max, fluffy) {
     this.spent = 0;
     this.max = max || Number.MAX_VALUE;
     if (fluffy == "fluffy") {
-       this.fluffy = true; 
+       this.fluffy = true;
        this.type = "linear";
        this.increase = 10;
    }
@@ -678,7 +678,7 @@ AutoPerks.initializePerks = function () {
         AutoPerks.perkHolder[i].updatedValue = AutoPerks.perkHolder[i].value;
     }
     AutoPerks.setPerksByName();
-    AutoPerks.setDefaultRatios();      
+    AutoPerks.setDefaultRatios();
 }
 
 AutoPerks.getFixedPerks = function() {
@@ -834,7 +834,7 @@ RAutoPerks.displayGUI = function() {
     apGUI.$RratioPreset.innerHTML = RpresetListHtml;
     var loadLastPreset = localStorage.getItem('RAutoperkSelectedRatioPresetID');
     var setID;
-    if (loadLastPreset != null) { 
+    if (loadLastPreset != null) {
         // Why 8?  What is this?
         if (loadLastPreset == 8 && !localStorage.getItem('RAutoperkSelectedRatioPresetName'))
             loadLastPreset = 2;
@@ -842,7 +842,7 @@ RAutoPerks.displayGUI = function() {
             loadLastPreset = 2;
         setID = loadLastPreset;
     }
-    else 
+    else
         setID = 0;
     apGUI.$RratioPreset.selectedIndex = setID;
     apGUI.$ratiosLine1.appendChild(apGUI.$RratioPresetLabel);
@@ -975,7 +975,7 @@ RAutoPerks.clickAllocate = function() {
         remainingRadon = radon - preSpentRn;
     }
     if (Number.isNaN(remainingRadon))
-        debug("RAutoPerks: Major Error: Reading your Radon amount. " + remainingRadon, "perks");    
+        debug("RAutoPerks: Major Error: Reading your Radon amount. " + remainingRadon, "perks");
 
     var result;
     if (getPageSetting('fastallocate')==true)
@@ -1041,7 +1041,7 @@ RAutoPerks.spendRadon = function(radon) {
         debug("RAutoPerks: Major Error - Radon is Not a Number!","perks");
         return false;
     }
-    
+
     var perks = RAutoPerks.getVariablePerks();
 
     var effQueue = new FastPriorityQueue(function(a,b) { return a.efficiency > b.efficiency } );
@@ -1056,7 +1056,7 @@ RAutoPerks.spendRadon = function(radon) {
             return false;
         }
         if(perks[i].efficiency != 0)
-            effQueue.add(perks[i]);        
+            effQueue.add(perks[i]);
     }
     if (effQueue.size < 1) {
         debug("All Perk Ratios were 0, or some other error.","perks");
@@ -1097,15 +1097,15 @@ RAutoPerks.spendRadon = function(radon) {
             }
         }
         var dumpresults = heb4dump - radon;
-        debug("RAutoPerks1: Dump Perk " + RAutoPerks.capitaliseFirstLetter(RdumpPerk.name) + " level post-dump: "+ RdumpPerk.radLevel + " Radon Dumped: " + prettify(dumpresults) + " Rn.", "perks");        
+        debug("RAutoPerks1: Dump Perk " + RAutoPerks.capitaliseFirstLetter(RdumpPerk.name) + " level post-dump: "+ RdumpPerk.radLevel + " Radon Dumped: " + prettify(dumpresults) + " Rn.", "perks");
     }
-    
+
     var heB4round2 = radon;
     while (effQueue.size > 1) {
         mostEff = effQueue.poll();
         if (mostEff.radLevel >= mostEff.max) continue;
         price = RAutoPerks.calculatePrice(mostEff, mostEff.radLevel);
-        if (price >= radon) continue;        
+        if (price >= radon) continue;
         radon -= price;
         mostEff.radLevel++;
         mostEff.spent += price;
@@ -1172,7 +1172,7 @@ RAutoPerks.spendRadon2 = function(radon) {
             }  else  {
                 radon -= price;
                 mostEff.radLevel++;
-                mostEff.spent += price;            
+                mostEff.spent += price;
             }
             price = RAutoPerks.calculatePrice(mostEff, mostEff.radLevel);
             inc = RAutoPerks.calculateIncrease(mostEff, mostEff.radLevel);
@@ -1195,9 +1195,9 @@ RAutoPerks.spendRadon2 = function(radon) {
             }
         }
         var dumpresults = heb4dump - radon;
-        debug("RAutoPerks2: Dump Perk " + RAutoPerks.capitaliseFirstLetter(RdumpPerk.name) + " level post-dump: "+ RdumpPerk.radLevel + " Radon Dumped: " + prettify(dumpresults) + " Rn.", "perks");        
+        debug("RAutoPerks2: Dump Perk " + RAutoPerks.capitaliseFirstLetter(RdumpPerk.name) + " level post-dump: "+ RdumpPerk.radLevel + " Radon Dumped: " + prettify(dumpresults) + " Rn.", "perks");
     }
-    
+
     var heB4round2 = radon;
     while (effQueue.size > 1) {
         mostEff = effQueue.poll();
@@ -1316,7 +1316,7 @@ RAutoPerks.FixedPerk = function(name, base, level, max, fluffy) {
     this.spent = 0;
     this.max = max || Number.MAX_VALUE;
     if (fluffy == "fluffy") {
-       this.fluffy = true; 
+       this.fluffy = true;
        this.type = "linear";
        this.increase = 10;
    }
@@ -1380,7 +1380,7 @@ RAutoPerks.initializePerks = function () {
         RAutoPerks.perkHolder[i].updatedValue = RAutoPerks.perkHolder[i].value;
     }
     RAutoPerks.setPerksByName();
-    RAutoPerks.setDefaultRatios();      
+    RAutoPerks.setDefaultRatios();
 };
 
 RAutoPerks.getFixedPerks = function() {
